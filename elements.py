@@ -1,11 +1,17 @@
-import sys
-
 TERMINALS = ['v-line', 'h-line', 'dl-line', 'dr-line']
 NON_TERMINALS = ['house', 'base', 'walls', 'roof']
 
+
 class Item:
-    def __init__(self, etype, start, stop):
-        self.type = etype
+    left = None
+    right = None
+    top = None
+    bottom = None
+
+
+class Terminal:
+    def __init__(self, element_type, start, stop):
+        self.type = element_type
         self.start = start
         self.stop = stop
         self.left = min([start[0], stop[0]])
@@ -13,8 +19,6 @@ class Item:
         self.top = max([start[1], stop[1]])
         self.bottom = min([start[1], stop[1]])
 
-class Terminal:
-    pass
 
 class NonTerminal:
     items = []
@@ -23,10 +27,10 @@ class NonTerminal:
     top = None
     bottom = None
 
-    def __init__(self, etype):
-        self.etype = etype
+    def __init__(self, element_type):
+        self.type = element_type
 
-    def add_item(self, item: Item):
+    def add_item(self, item):
         self.items.append(item)
         if self.left is None or item.left < self.left:
             self.left = item.left
