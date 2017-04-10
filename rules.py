@@ -2,7 +2,7 @@ from elements import *
 from operators import *
 
 
-class ExtendedRule:
+class Rule:
 
     def __init__(self):
         self.type = None
@@ -17,7 +17,7 @@ class ExtendedRule:
             return False
 
 
-class RoofRule(ExtendedRule):
+class RoofRule(Rule):
 
     def __init__(self):
         self.type = Type.ROOF
@@ -31,7 +31,7 @@ class RoofRule(ExtendedRule):
             and Left().can_apply(items_list)
 
 
-class WallsRule(ExtendedRule):
+class WallsRule(Rule):
 
     def __init__(self):
         self.type = Type.WALLS
@@ -49,7 +49,7 @@ class WallsRule(ExtendedRule):
         return result
 
 
-class BaseRule(ExtendedRule):
+class BaseRule(Rule):
 
     def __init__(self):
         self.type = Type.BASE
@@ -63,7 +63,7 @@ class BaseRule(ExtendedRule):
             and Above().can_apply(items_list)
 
 
-class RectRule(ExtendedRule):
+class RectRule(Rule):
 
 
     def __init__(self):
@@ -78,7 +78,7 @@ class RectRule(ExtendedRule):
             and Above().can_apply(items_list)
 
 
-class HouseRule(ExtendedRule):
+class HouseRule(Rule):
 
     def __init__(self):
         self.type = Type.HOUSE

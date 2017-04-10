@@ -1,4 +1,4 @@
-from extended_rules import *
+from rules import *
 
 ROOF_GRAMMAR = [
     RoofRule()

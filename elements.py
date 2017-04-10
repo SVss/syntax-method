@@ -16,7 +16,7 @@ class Type(Enum):
     ROOF = 'roof'
 
     @staticmethod
-    def getType(start, stop):
+    def get_type(start, stop):
         if start[0] == stop[0]:
             result = Type.VERTICAL
         elif start[1] == stop[1]:
