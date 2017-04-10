@@ -44,7 +44,7 @@ class NonTerminal:
         self.type = element_type
         self.items = items
         if len(items) > 0:
-            self.left = min(items, key=lambda x: x.left)
-            self.right = max(items, key=lambda x: x.right)
-            self.top = max(items, key=lambda x: x.top)
-            self.bottom = min(items, key=lambda x: x.bottom)
+            self.left = min(i.left for i in items)
+            self.right = max(i.right for i in items)
+            self.top = max(i.top for i in items)
+            self.bottom = min(i.bottom for i in items)
