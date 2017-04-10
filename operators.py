@@ -1,6 +1,6 @@
 from elements import Item
 
-class Rule:
+class Operator:
     def can_apply(self, items_list):
         raise NotImplementedError()
 
@@ -8,19 +8,19 @@ class Rule:
         raise NotImplementedError()
 
 
-class LeftRule(Rule):
+class Left(Operator):
     def can_apply(self, items_list):
         assert len(items_list) == 2
         return items_list[0].right <= items_list[1].left
 
 
-class AboveRule(Rule):
+class Above(Operator):
     def can_apply(self, items_list):
         assert len(items_list) == 2
         return items_list[0].bottom >= items_list[1].top
 
 
-class InsideRule(Rule):
+class Inside(Operator):
     def can_apply(self, items_list):
         assert len(items_list) == 2
         inner = items_list[0]
