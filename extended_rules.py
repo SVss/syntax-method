@@ -25,7 +25,7 @@ class WallsRule(Rule):
             and items_list[1].type == Type.VERTICAL
         if not result:
             return False
-        result = LeftRule.can_apply(items_list)
+        result = LeftRule().can_apply(items_list)
         if not result:
             list.reverse(items_list)
             result = LeftRule().can_apply(items_list)
