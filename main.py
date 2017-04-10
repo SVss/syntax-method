@@ -24,13 +24,17 @@ def test_analyze():
 
 
 def generate_house(rect):
-    draw_sample(HouseRule().generate(rect))
+    house = HouseRule().generate(rect)
+    if analyze(house, HOUSE_GRAMMAR):
+        draw_sample(house)
+    else:
+        print("Missed!")
 
 
 def main():
     generate_house(
         Rect(
-            [0, 50],
+            [0, 100],
             [40, 0]
         )
     )
