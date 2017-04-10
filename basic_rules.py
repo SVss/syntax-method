@@ -1,32 +1,27 @@
 from elements import Item
 
 class Rule:
-    @staticmethod
-    def can_apply(items_list):
+    def can_apply(self, items_list):
         raise NotImplementedError()
 
-    @staticmethod
-    def generate_for(item):
+    def generate_for(self, item):
         raise NotImplementedError()
 
 
 class LeftRule(Rule):
-    @staticmethod
-    def can_apply(items_list):
+    def can_apply(self, items_list):
         assert len(items_list) == 2
         return items_list[0].right < items_list[1].left
 
 
-class UpRule(Rule):
-    @staticmethod
-    def can_apply(items_list):
+class AboveRule(Rule):
+    def can_apply(self, items_list):
         assert len(items_list) == 2
         return items_list[0].bottom > items_list[1].top
 
 
 class InsideRule(Rule):
-    @staticmethod
-    def can_apply(items_list):
+    def can_apply(self, items_list):
         assert len(items_list) == 2
         inner = items_list[0]
         outer = items_list[1]
