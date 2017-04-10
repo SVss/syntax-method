@@ -30,6 +30,13 @@ class RoofRule(Rule):
             and items_list[1].type == Type.DIAGONAL_LEFT \
             and Left().can_apply(items_list)
 
+    def generate(self, rect):
+        left, right = Left().split(rect)
+        return [
+            Terminal.create(Type.DIAGONAL_RIGHT, left),
+            Terminal.create(Type.DIAGONAL_LEFT, right)
+        ]
+
 
 class WallsRule(Rule):
 
@@ -48,6 +55,13 @@ class WallsRule(Rule):
             result = Left().can_apply(items_list)
         return result
 
+    def generate(self, rect):
+        left, right = Left().split(rect)
+        return [
+            Terminal.create(Type.VERTICAL, left),
+            Terminal.create(Type.VERTICAL, right)
+        ]
+
 
 class BaseRule(Rule):
 
@@ -62,9 +76,13 @@ class BaseRule(Rule):
             and items_list[1].type == Type.HORIZONTAL \
             and Above().can_apply(items_list)
 
+    def generate(self, rect):
+        top, bottom = Above().split(rect)
+        result = WallsRule().generate(top)
+        result += [Terminal.create(Type.HORIZONTAL, bottom)]
+        return result
 
 class RectRule(Rule):
-
 
     def __init__(self):
         self.type = Type.RECT
@@ -76,6 +94,12 @@ class RectRule(Rule):
         return items_list[0].type == Type.HORIZONTAL \
             and items_list[1].type == Type.BASE \
             and Above().can_apply(items_list)
+
+    def generate(self, rect):
+        top, bottom = Above().split(rect)
+        result = [Terminal.create(Type.HORIZONTAL, top)]
+        result += BaseRule().generate(bottom)
+        return result
 
 
 class HouseRule(Rule):
@@ -90,3 +114,7 @@ class HouseRule(Rule):
         return items_list[0].type == Type.ROOF \
             and items_list[1].type == Type.RECT \
             and Above().can_apply(items_list)
+
+    def generate(self, rect):
+        top, bottom = Above().split(rect)
+        return RoofRule().generate(top) + RectRule().generate(bottom)

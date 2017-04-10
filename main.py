@@ -3,7 +3,7 @@ from grammar import *
 from syntax_method import analyze
 from drawer import draw_sample
 
-def main():
+def test_analyze():
     print("Is roof a roof ?")
     print(analyze(INPUT_ROOF, ROOF_GRAMMAR))
     draw_sample(INPUT_ROOF)
@@ -21,6 +21,20 @@ def main():
 
     print("Is house a roof ?")
     print(analyze(INPUT_HOUSE, ROOF_GRAMMAR))
+
+
+def generate_house(rect):
+    draw_sample(HouseRule().generate(rect))
+
+
+def main():
+    generate_house(
+        Rect(
+            [0, 50],
+            [40, 0]
+        )
+    )
+
 
 if __name__ == '__main__':
     main()

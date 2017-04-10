@@ -1,5 +1,5 @@
 from enum import Enum
-from random import randint
+from random import uniform
 
 
 HIGH_BORDER = 15/100
@@ -51,26 +51,26 @@ class Terminal:
         width = rect.snd[0] - rect.fst[0]
         height = rect.fst[1] - rect.snd[1]
         if type == Type.VERTICAL:
-            x_common = randint(rect.fst[0], rect.snd[0])
-            y_start = rect.fst[1] - randint(0, HIGH_BORDER*height)
-            y_stop = rect.snd[1] + randint(0, HIGH_BORDER*height)
+            x_common = uniform(rect.fst[0], rect.snd[0])
+            y_start = rect.fst[1] - uniform(0, HIGH_BORDER)*height
+            y_stop = rect.snd[1] + uniform(0, HIGH_BORDER*height)
             result = Terminal([x_common, y_start], [x_common, y_stop])
         elif type == Type.HORIZONTAL:
-            y_common = randint(rect.fst[1], rect.snd[1])
-            x_start = rect.fst[0] + randint(0, HIGH_BORDER*width)
-            x_stop = rect.snd[0] - randint(0, HIGH_BORDER*width)
+            y_common = uniform(rect.fst[1], rect.snd[1])
+            x_start = rect.fst[0] + uniform(0, HIGH_BORDER*width)
+            x_stop = rect.snd[0] - uniform(0, HIGH_BORDER*width)
             result = Terminal([x_start, y_common], [x_stop, y_common])
         elif type == Type.DIAGONAL_LEFT:
-            x_start = rect.fst[0] + randint(0, HIGH_BORDER*width)
-            x_stop = rect.snd[0] - randint(0, HIGH_BORDER*width)
-            y_start = rect.fst[1] - randint(0, HIGH_BORDER*height)
-            y_stop = rect.snd[1] + randint(0, HIGH_BORDER*height)
+            x_start = rect.fst[0] + uniform(0, HIGH_BORDER*width)
+            x_stop = rect.snd[0] - uniform(0, HIGH_BORDER*width)
+            y_start = rect.fst[1] - uniform(0, HIGH_BORDER*height)
+            y_stop = rect.snd[1] + uniform(0, HIGH_BORDER*height)
             result = Terminal([x_start, y_start], [x_stop, y_stop])
         elif type == Type.DIAGONAL_RIGHT:
-            x_start = rect.fst[0] + randint(0, HIGH_BORDER*width)
-            x_stop = rect.snd[0] - randint(0, HIGH_BORDER*width)
-            y_start = rect.snd[1] + randint(0, HIGH_BORDER*height)
-            y_stop = rect.fst[1] - randint(0, HIGH_BORDER*height)
+            x_start = rect.fst[0] + uniform(0, HIGH_BORDER*width)
+            x_stop = rect.snd[0] - uniform(0, HIGH_BORDER*width)
+            y_start = rect.snd[1] + uniform(0, HIGH_BORDER*height)
+            y_stop = rect.fst[1] - uniform(0, HIGH_BORDER*height)
             result = Terminal([x_start, y_start], [x_stop, y_stop])
         return result
 
