@@ -1,4 +1,5 @@
 def analyze(items_list, grammar):
+    items_list = items_list[:]  # copy for in-place processing blah-blah-blah...
     done = False
     error = False
     for rule in grammar:
@@ -11,7 +12,9 @@ def analyze(items_list, grammar):
                 del items_list[i+1]
             i += 1
         error = not applied
-    return not error
+    return not error and \
+            len(items_list) == 1 and \
+            items_list[0].type == grammar[-1].type
 
 def synthesize():
     pass
