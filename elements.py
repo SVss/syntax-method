@@ -43,7 +43,7 @@ class NonTerminal:
     def __init__(self, element_type, items=[]):
         self.type = element_type
         self.items = items
-        if len(items > 0):
+        if len(items) > 0:
             self.left = min(items, key=lambda x: x.left)
             self.right = max(items, key=lambda x: x.right)
             self.top = max(items, key=lambda x: x.top)
