@@ -1,5 +1,3 @@
-from elements import Item
-
 class Operator:
     def can_apply(self, items_list):
         raise NotImplementedError()
