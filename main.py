@@ -1,43 +1,48 @@
 from input import *
 from grammar import *
+from utils import random_change
 from syntax_method import analyze
 from drawer import draw_sample
 
-def test_analyze():
-    print("Is roof a roof ?")
-    print(analyze(INPUT_ROOF, ROOF_GRAMMAR))
-    draw_sample(INPUT_ROOF)
+INPUT_COUNT = 5
 
-    print("Is rectangle a roof ?")
-    print(analyze(INPUT_RECT, ROOF_GRAMMAR))
-
-    print("Is rectangle a rectangle ?")
-    print(analyze(INPUT_RECT, RECT_GRAMMAR))
-    draw_sample(INPUT_RECT)
-
-    print("Is house a house ?")
-    print(analyze(INPUT_HOUSE, HOUSE_GRAMMAR))
-    draw_sample(INPUT_HOUSE)
-
-    print("Is house a roof ?")
-    print(analyze(INPUT_HOUSE, ROOF_GRAMMAR))
+START_X = 0
+START_Y = 60
+FINISH_X = 40
+FINISH_Y = 0
+DELTA_X = 10
+DELTA_Y = 10
 
 
-def generate_house(rect):
-    house = HouseRule().generate(rect)
-    if analyze(house, HOUSE_GRAMMAR):
-        draw_sample(house)
-    else:
-        print("Missed!")
+def generate_house():
+    sx = random_change(START_X, DELTA_X)
+    sy = random_change(START_Y, DELTA_Y)
+    fx = random_change(FINISH_X, DELTA_X)
+    fy = random_change(FINISH_Y, DELTA_Y)
+    rect = Rect(
+        [sx, sy],
+        [fx, fy]
+    )
+    return HouseRule().generate(rect)
+
+
+def draw_check_sample(sample):
+    text = 'Incorrect !'
+    if analyze(sample, HOUSE_GRAMMAR):
+        text = 'Correct'
+    draw_sample(sample, text)
 
 
 def main():
-    generate_house(
-        Rect(
-            [0, 100],
-            [40, 0]
-        )
-    )
+    draw_check_sample(CORRECT_HOUSE)
+    input = [None] * INPUT_COUNT
+    for i in range(0, len(input)):
+        input[i] = generate_house()
+    for x in input:
+        draw_check_sample(x)
+    draw_check_sample(INCORRECT_HOUSE)
+    draw_check_sample(ROOF)
+    draw_check_sample(RECT)
 
 
 if __name__ == '__main__':
