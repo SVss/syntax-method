@@ -31,12 +31,13 @@ class Above(Operator):
         assert len(items_list) == 2
         return items_list[0].bottom >= items_list[1].top
 
-    def split(self, rect):
+    def split(self, rect, prop=1):
         height = rect.fst[1] - rect.snd[1]
-        y_center = (rect.fst[1] + rect.snd[1]) / 2
-        y_center = random_change(y_center, HIGH_ASSYMETRY*height)
-        top_rect = Rect(rect.fst, [rect.snd[0], y_center])
-        bottom_rect = Rect([rect.fst[0], y_center], rect.snd)
+        h_low = prop*height/(1+prop)
+        y_split = rect.snd[1] + h_low
+        y_split = random_change(y_split, HIGH_ASSYMETRY*height)
+        top_rect = Rect(rect.fst, [rect.snd[0], y_split])
+        bottom_rect = Rect([rect.fst[0], y_split], rect.snd)
         return top_rect, bottom_rect
 
 

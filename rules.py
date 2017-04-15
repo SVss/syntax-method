@@ -77,7 +77,7 @@ class BaseRule(Rule):
             and Above().can_apply(items_list)
 
     def generate(self, rect):
-        top, bottom = Above().split(rect)
+        top, bottom = Above().split(rect, 0.2)
         result = WallsRule().generate(top)
         result += [Terminal.create(Type.HORIZONTAL, bottom)]
         return result
@@ -96,7 +96,7 @@ class RectRule(Rule):
             and Above().can_apply(items_list)
 
     def generate(self, rect):
-        top, bottom = Above().split(rect)
+        top, bottom = Above().split(rect, 5)
         result = [Terminal.create(Type.HORIZONTAL, top)]
         result += BaseRule().generate(bottom)
         return result
@@ -116,5 +116,5 @@ class HouseRule(Rule):
             and Above().can_apply(items_list)
 
     def generate(self, rect):
-        top, bottom = Above().split(rect)
+        top, bottom = Above().split(rect, 2)
         return RoofRule().generate(top) + RectRule().generate(bottom)
